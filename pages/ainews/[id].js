@@ -11,7 +11,15 @@ export default function AiNewsDetail() {
   if (!id) {
     return (
       <Layout>
-        <div style={{ padding: '2rem', textAlign: 'center' }}>로딩 중...</div>
+        <div style={{ 
+          padding: '2rem', 
+          textAlign: 'center',
+          fontSize: 'clamp(1.2rem, 4vw, 1.5rem)',
+          color: '#666',
+          fontFamily: "'Pretendard', sans-serif"
+        }}>
+          로딩 중...
+        </div>
       </Layout>
     );
   }
@@ -20,7 +28,6 @@ export default function AiNewsDetail() {
   const news = aiNewsList[currentIndex];
   const nextNews = aiNewsList[currentIndex + 1];
 
-  // ✅ 추천 뉴스 2개 뽑기 (현재 뉴스 제외)
   const recommendedNews = useMemo(() => {
     const others = aiNewsList.filter(item => item.id !== id);
     const shuffled = others.sort(() => 0.5 - Math.random());
@@ -30,7 +37,15 @@ export default function AiNewsDetail() {
   if (!news) {
     return (
       <Layout>
-        <div style={{ padding: '2rem', textAlign: 'center' }}>뉴스를 찾을 수 없습니다.</div>
+        <div style={{ 
+          padding: '2rem', 
+          textAlign: 'center',
+          fontSize: 'clamp(1.2rem, 4vw, 1.5rem)',
+          color: '#666',
+          fontFamily: "'Pretendard', sans-serif"
+        }}>
+          뉴스를 찾을 수 없습니다.
+        </div>
       </Layout>
     );
   }
@@ -38,49 +53,78 @@ export default function AiNewsDetail() {
   return (
     <Layout>
       <div style={{
-        padding: '2rem',
-        maxWidth: '800px',
+        padding: 'clamp(1rem, 5vw, 2rem)',
+        maxWidth: '1000px',
         margin: '0 auto',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: "'Pretendard', sans-serif"
       }}>
-        <h1 style={{ marginBottom: '1rem', fontSize: '2rem', fontWeight: '700' }}>{news.title}</h1>
+        <h1 style={{ 
+          marginBottom: 'clamp(1rem, 3vw, 2rem)', 
+          fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', 
+          fontWeight: '800',
+          lineHeight: '1.4',
+          color: '#2d3748',
+          textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+        }}>
+          {news.title}
+        </h1>
         
-        <img 
-          src={news.thumbnail || '/ai-news-default.jpg'}
-          alt={news.title}
-          style={{
-            width: '100%',
-            height: 'auto',
-            borderRadius: '10px',
-            marginBottom: '2rem',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-          }}
-        />
+        <div style={{
+          position: 'relative',
+          width: '100%',
+          borderRadius: '20px',
+          overflow: 'hidden',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+          marginBottom: 'clamp(2rem, 5vw, 3rem)'
+        }}>
+          <img 
+            src={news.thumbnail || '/ai-news-default.jpg'}
+            alt={news.title}
+            style={{
+              width: '100%',
+              height: 'auto',
+              objectFit: 'cover',
+              transition: 'transform 0.3s ease'
+            }}
+          />
+        </div>
 
         <p style={{
-          fontSize: '1.2rem',
-          color: '#555',
-          marginBottom: '3rem',
-          lineHeight: '1.6'
+          fontSize: 'clamp(1.1rem, 3vw, 1.3rem)',
+          color: '#4a5568',
+          marginBottom: 'clamp(2rem, 5vw, 3rem)',
+          lineHeight: '1.8',
+          textAlign: 'left',
+          padding: '0 clamp(1rem, 3vw, 2rem)'
         }}>
           {news.fullDescription}
         </p>
 
-        {/* ✅ 다음 뉴스 or 처음으로 돌아가기 */}
-        <div style={{ marginTop: '2rem' }}>
+        <div style={{ 
+          marginTop: 'clamp(2rem, 5vw, 3rem)',
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '1rem',
+          flexWrap: 'wrap'
+        }}>
           {nextNews ? (
             <Link href={`/ainews/${nextNews.id}`}>
               <button style={{
-                padding: '1rem 2.5rem',
-                fontSize: '1.125rem',
+                padding: 'clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 3vw, 2.5rem)',
+                fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
                 backgroundColor: '#7b4cdb',
                 color: 'white',
                 border: 'none',
-                borderRadius: '10px',
+                borderRadius: '12px',
                 cursor: 'pointer',
                 fontWeight: '600',
-                transition: 'all 0.2s ease',
-                boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 15px rgba(123, 76, 219, 0.2)',
+                ':hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 6px 20px rgba(123, 76, 219, 0.3)'
+                }
               }}>
                 ➡️ 다음 뉴스 보기
               </button>
@@ -88,16 +132,20 @@ export default function AiNewsDetail() {
           ) : (
             <Link href="/">
               <button style={{
-                padding: '1rem 2.5rem',
-                fontSize: '1.125rem',
+                padding: 'clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 3vw, 2.5rem)',
+                fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
                 backgroundColor: '#4CAF50',
                 color: 'white',
                 border: 'none',
-                borderRadius: '10px',
+                borderRadius: '12px',
                 cursor: 'pointer',
                 fontWeight: '600',
-                transition: 'all 0.2s ease',
-                boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 15px rgba(76, 175, 80, 0.2)',
+                ':hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 6px 20px rgba(76, 175, 80, 0.3)'
+                }
               }}>
                 🏠 처음으로 돌아가기
               </button>
@@ -105,56 +153,79 @@ export default function AiNewsDetail() {
           )}
         </div>
 
-        {/* ✅ 추천 뉴스 섹션 */}
-        <div style={{ marginTop: '5rem' }}>
+        <div style={{ 
+          marginTop: 'clamp(4rem, 8vw, 6rem)',
+          padding: 'clamp(2rem, 5vw, 3rem)',
+          background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)',
+          borderRadius: '24px',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
+        }}>
           <h2 style={{
-            marginBottom: '2rem',
-            fontSize: '1.6rem',
-            fontWeight: '700',
-            color: '#333'
+            marginBottom: 'clamp(1.5rem, 4vw, 2.5rem)',
+            fontSize: 'clamp(1.4rem, 4vw, 1.8rem)',
+            fontWeight: '800',
+            color: '#2d3748',
+            background: 'linear-gradient(135deg, #7b4cdb, #a17fe0)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
           }}>
             🔥 추천 뉴스
           </h2>
 
           <div style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '1.5rem',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: 'clamp(1rem, 3vw, 2rem)',
             justifyContent: 'center'
           }}>
             {recommendedNews.map((item) => (
               <Link key={item.id} href={`/ainews/${item.id}`} style={{ textDecoration: 'none' }}>
                 <div style={{
-                  width: '280px',
-                  backgroundColor: '#f9f9f9',
-                  borderRadius: '12px',
+                  backgroundColor: 'white',
+                  borderRadius: '16px',
                   overflow: 'hidden',
-                  boxShadow: '0 4px 10px rgba(0,0,0,0.08)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
                   transition: 'all 0.3s ease',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  ':hover': {
+                    transform: 'translateY(-5px)',
+                    boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
+                  }
                 }}>
-                  <img 
-                    src={item.thumbnail || '/ai-news-default.jpg'}
-                    alt={item.title}
-                    style={{
-                      width: '100%',
-                      height: '160px',
-                      objectFit: 'cover'
-                    }}
-                  />
-                  <div style={{ padding: '1rem' }}>
+                  <div style={{
+                    position: 'relative',
+                    width: '100%',
+                    paddingTop: '56.25%'
+                  }}>
+                    <img 
+                      src={item.thumbnail || '/ai-news-default.jpg'}
+                      alt={item.title}
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  </div>
+                  <div style={{ 
+                    padding: 'clamp(1rem, 3vw, 1.5rem)'
+                  }}>
                     <h3 style={{
-                      fontSize: '1.1rem',
-                      fontWeight: '600',
-                      color: '#333',
-                      marginBottom: '0.5rem'
+                      fontSize: 'clamp(1.1rem, 3vw, 1.3rem)',
+                      fontWeight: '700',
+                      color: '#2d3748',
+                      marginBottom: '0.8rem',
+                      lineHeight: '1.4'
                     }}>
                       {item.title}
                     </h3>
                     <p style={{
-                      fontSize: '0.95rem',
-                      color: '#666',
-                      lineHeight: '1.4'
+                      fontSize: 'clamp(0.9rem, 2.5vw, 1.1rem)',
+                      color: '#4a5568',
+                      lineHeight: '1.6'
                     }}>
                       {item.description}
                     </p>
