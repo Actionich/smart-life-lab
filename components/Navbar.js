@@ -12,7 +12,7 @@ export default function Navbar() {
       fontSize: '1.5rem'
     }}>
       <Link href="/" style={{ color: '#7b4cdb', textDecoration: 'none', fontWeight: 'bold' }}>
-        Smart Life Lab
+        🏠
       </Link>
       <div style={{ display: 'flex', gap: '2rem' }}>
         <Link href="/about" style={{ color: '#7b4cdb', textDecoration: 'none' }}>
