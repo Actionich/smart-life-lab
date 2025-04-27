@@ -1,246 +1,56 @@
-import Link from 'next/link';
-import Navbar from '../components/Navbar';
-import newsList from '../data/news';
-import aiNewsList from '../data/ainews';
-import styles from '../styles/Home.module.css';
+import Link from 'next/link'
+import Navbar from '../components/Navbar'
+import newsList from '../data/news'
+import aiNewsList from '../data/ainews'
+import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-    <div style={{ maxWidth: '100%', margin: '0 auto', padding: '0 0.5rem' }}>
+    <div className={styles.container}>
       <Navbar />
 
-      {/* ✅ 메인 배너 */}
-      <div className={styles.mainBanner} style={{ 
-        position: 'relative', 
-        height: 'clamp(250px, 40vh, 350px)',
-        background: 'linear-gradient(135deg, #7b4cdb 0%, #a17fe0 100%)',
-        margin: '0',
-        padding: '0',
-        overflow: 'hidden',
-        boxShadow: '0 10px 20px rgba(123, 76, 219, 0.15)',
-        borderRadius: '12px'
-      }}>
-        <div style={{ 
-          padding: 'clamp(0.8rem, 2vw, 1.5rem)',
-          width: '100%',
-          margin: '0 auto',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'relative',
-          zIndex: 1
-        }}>
-          <div className={styles.mainBannerTitle} style={{ 
-            fontSize: 'clamp(1.1rem, 3.5vw, 1.8rem)',
-            lineHeight: '1.3',
-            marginBottom: '0.6rem',
-            wordBreak: 'keep-all',
-            whiteSpace: 'pre-wrap',
-            fontFamily: "'Pretendard', sans-serif",
-            fontWeight: '800',
-            color: 'white',
-            textShadow: '0 2px 4px rgba(0,0,0,0.2)',
-            textAlign: 'center',
-            padding: '0 0.5rem'
-          }}>
-            Smart Life Lab에 오신 것을 환영합니다! 🌟
-          </div>
-          <div className={styles.mainBannerSubtitle} style={{
-            fontSize: 'clamp(0.85rem, 2.2vw, 1.1rem)',
-            lineHeight: '1.5',
-            wordBreak: 'keep-all',
-            whiteSpace: 'pre-wrap',
-            fontFamily: "'Pretendard', sans-serif",
-            fontWeight: '400',
-            color: 'rgba(255, 255, 255, 0.9)',
-            maxWidth: 'min(600px, 95vw)',
-            textAlign: 'center',
-            marginBottom: 'clamp(1.2rem, 3vw, 1.8rem)',
-            padding: '0 0.5rem'
-          }}>
-            하루 '하나씩 AI'로 스마트해지는 삶을 경험하세요!
-          </div>
-          <Link href="/about">
-            <button className={styles.buttonPrimary} style={{
-              padding: 'clamp(0.5rem, 1.8vw, 0.7rem) clamp(1.2rem, 3.5vw, 1.8rem)',
-              fontSize: 'clamp(0.85rem, 1.8vw, 0.95rem)',
-              fontWeight: '600',
-              borderRadius: '6px',
-              background: 'white',
-              color: '#7b4cdb',
-              border: 'none',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 3px 12px rgba(0, 0, 0, 0.1)',
-              ':hover': {
-                transform: 'translateY(-2px)',
-                boxShadow: '0 5px 15px rgba(0, 0, 0, 0.15)'
-              }
-            }}>
-              자세히보기
-            </button>
-          </Link>
-        </div>
-      </div>
+      {/* 메인 배너 */}
+      <section className={styles.mainBanner}>
+        <h1>Smart Life Lab에 오신 것을 환영합니다! 🌟</h1>
+        <p>하루 '하나씩 AI'로 스마트해지는 삶을 경험하세요!</p>
+        <Link href="/about">
+          <button>자세히보기</button>
+        </Link>
+      </section>
 
-      {/* 🤖 AI 뉴스 */}
-      <section className={styles.aiNewsSection} style={{ 
-        marginTop: 'clamp(1.5rem, 4vw, 3rem)',
-        padding: '0 clamp(0.3rem, 1.5vw, 0.8rem)'
-      }}>
-        <h2 style={{
-          textAlign: 'center',
-          fontSize: 'clamp(1.3rem, 3.5vw, 2.2rem)',
-          fontWeight: '800',
-          fontFamily: "'Pretendard', sans-serif",
-          background: 'linear-gradient(135deg, #7b4cdb, #a17fe0)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          marginBottom: 'clamp(1.5rem, 3vw, 2.5rem)',
-          textShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          🤖 AI 뉴스
-        </h2>
+      {/* AI 뉴스 */}
+      <section style={{ marginBottom: '3rem' }}>
+        <h2 className={`${styles.sectionTitle} ${styles.aiTitle}`}>🤖 AI 뉴스</h2>
 
-        <div className={styles.aiNewsGrid} style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-          gap: 'clamp(0.8rem, 2.5vw, 1.5rem)',
-          padding: '0 clamp(0.3rem, 1.5vw, 0.8rem)'
-        }}>
-          {aiNewsList.slice(0, 6).map((news) => (
-            <Link href={`/ainews/${news.id}`} key={news.id} style={{ textDecoration: 'none' }}>
-              <div className={styles.newsCard} style={{
-                backgroundColor: '#ffffff',
-                borderRadius: '12px',
-                overflow: 'hidden',
-                boxShadow: '0 3px 15px rgba(0,0,0,0.08)',
-                transition: 'all 0.3s ease',
-                height: '100%',
-                ':hover': {
-                  transform: 'translateY(-6px)',
-                  boxShadow: '0 8px 25px rgba(0,0,0,0.12)'
-                }
-              }}>
-                <img 
-                  src={news.thumbnail}
-                  alt={news.title}
-                  style={{ 
-                    width: '100%', 
-                    height: 'clamp(130px, 25vw, 200px)', 
-                    objectFit: 'cover',
-                    borderTopLeftRadius: '12px',
-                    borderTopRightRadius: '12px'
-                  }}
-                />
-                <div style={{ 
-                  padding: 'clamp(0.8rem, 2.5vw, 1.2rem)',
-                  background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)'
-                }}>
-                  <h3 style={{ 
-                    fontSize: 'clamp(0.95rem, 2.2vw, 1.3rem)', 
-                    fontWeight: '700', 
-                    color: '#2d3748', 
-                    marginBottom: '0.6rem',
-                    fontFamily: "'Pretendard', sans-serif",
-                    lineHeight: '1.4'
-                  }}>
-                    {news.title}
-                  </h3>
-                  <p style={{ 
-                    fontSize: 'clamp(0.75rem, 1.8vw, 0.9rem)', 
-                    color: '#4a5568', 
-                    lineHeight: '1.5',
-                    fontFamily: "'Pretendard', sans-serif"
-                  }}>
-                    {news.description}
-                  </p>
+        <div className={styles.aiNewsGrid}>
+          {aiNewsList.slice(0, 6).map((n) => (
+            <Link key={n.id} href={`/ainews/${n.id}`} legacyBehavior>
+              <a className={styles.card}>
+                <img src={n.thumbnail} alt={n.title} />
+                <div className={styles.cardBody}>
+                  <h3>{n.title}</h3>
+                  <p>{n.description}</p>
                 </div>
-              </div>
+              </a>
             </Link>
           ))}
         </div>
       </section>
 
-      {/* 📢 최근 소식 */}
-      <section className={styles.latestNewsSection} style={{ 
-        marginTop: 'clamp(1.5rem, 4vw, 3rem)',
-        padding: '0 clamp(0.3rem, 1.5vw, 0.8rem)',
-        marginBottom: 'clamp(1.5rem, 4vw, 3rem)'
-      }}>
-        <h2 style={{
-          textAlign: 'center',
-          fontSize: 'clamp(1.3rem, 3.5vw, 2.2rem)',
-          fontWeight: '800',
-          fontFamily: "'Pretendard', sans-serif",
-          color: '#2d3748',
-          marginBottom: 'clamp(1.5rem, 3vw, 2.5rem)',
-          textShadow: '0 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          📢 최근 소식
-        </h2>
+      {/* 최근 소식 */}
+      <section style={{ margin: '3rem 0 4rem' }}>
+        <h2 className={`${styles.sectionTitle} ${styles.latestTitle}`}>📢 최근 소식</h2>
 
-        <div className={styles.latestNewsGrid} style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
-          gap: 'clamp(0.8rem, 2.5vw, 1.5rem)',
-          padding: '0 clamp(0.3rem, 1.5vw, 0.8rem)'
-        }}>
-          {newsList.map((news) => (
-            <Link href={`/news/${news.id}`} key={news.id} style={{ textDecoration: 'none' }}>
-              <div style={{
-                backgroundColor: '#ffffff',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                display: 'flex',
-                flexDirection: 'column',
-                transition: 'all 0.3s ease',
-                height: '100%',
-                ':hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: '0 12px 30px rgba(0,0,0,0.12)'
-                }
-              }}>
-                <img 
-                  src={news.thumbnail}
-                  alt={news.title}
-                  style={{ 
-                    width: '100%', 
-                    height: 'clamp(180px, 25vw, 220px)', 
-                    objectFit: 'cover',
-                    borderTopLeftRadius: '16px',
-                    borderTopRightRadius: '16px'
-                  }}
-                />
-                <div style={{ 
-                  padding: '1.5rem',
-                  background: 'linear-gradient(to bottom, #ffffff, #f8f9fa)'
-                }}>
-                  <h3 style={{ 
-                    fontSize: 'clamp(1.2rem, 2.5vw, 1.4rem)', 
-                    fontWeight: '700', 
-                    color: '#2d3748', 
-                    marginBottom: '0.8rem',
-                    fontFamily: "'Pretendard', sans-serif",
-                    color: '#333', 
-                    marginBottom: '0.5rem',
-                    fontFamily: "'Pretendard', sans-serif"
-                  }}>
-                    {news.title}
-                  </h3>
-                  <p style={{ 
-                    fontSize: 'clamp(0.8rem, 2vw, 0.9rem)', 
-                    color: '#666', 
-                    lineHeight: '1.4',
-                    fontFamily: "'Pretendard', sans-serif"
-                  }}>
-                    {news.description}
-                  </p>
+        <div className={styles.latestNewsGrid}>
+          {newsList.map((n) => (
+            <Link key={n.id} href={`/news/${n.id}`} legacyBehavior>
+              <a className={styles.card}>
+                <img src={n.thumbnail} alt={n.title} />
+                <div className={styles.cardBody}>
+                  <h3>{n.title}</h3>
+                  <p>{n.description}</p>
                 </div>
-              </div>
+              </a>
             </Link>
           ))}
         </div>
@@ -248,3 +58,4 @@ export default function Home() {
     </div>
   )
 }
+
